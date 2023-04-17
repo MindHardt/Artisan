@@ -1,0 +1,21 @@
+﻿@using System.Text
+@inject JsInterop Js
+
+<div class="my-component">
+    This component is defined in the <strong>Artisan.Components</strong> library.
+
+    <InputText @bind-Value="@Content"/>
+    <button @onclick="@DownloadAsync">СКАЧАТЬ</button>
+</div>
+
+@code
+{
+    private string Content { get; set; } = string.Empty;
+
+    private async Task DownloadAsync()
+    {
+        Stream fileContent = new MemoryStream(Encoding.UTF8.GetBytes(Content));
+
+        await Js.DownloadFileAsync(fileContent, "content.txt");
+    }
+}
