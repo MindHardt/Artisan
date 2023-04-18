@@ -2,7 +2,7 @@
 
 <div class="container">
     <h5>@DiceName</h5>
-    <img src="@ImagePath" alt=@($"1d{MaxValue}")/>
+    <img @onclick="@AlertResultAsync" src="@ImagePath" alt=@($"1d{MaxValue}")/>
     <input type="number" min="1" max="65536" step="1" @bind="@DiceCount"/>
     <button @onclick="@AlertResultAsync">Бросить!</button>
 </div>
@@ -23,7 +23,9 @@
 
     private async Task AlertResultAsync()
     {
-        int throwResult = Enumerable.Range(1, DiceCount).Select(_ => Random.Shared.Next(1, MaxValue + 1)).Sum();
+        int throwResult = Enumerable.Range(1, DiceCount)
+            .Select(_ => Random.Shared.Next(1, MaxValue + 1))
+            .Sum();
         string result = $"Ваш результат {FullDiceName} [{Minimum}-{Maximum}] : {throwResult}";
         
         await Js.AlertAsync(result);
