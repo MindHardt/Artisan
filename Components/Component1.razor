@@ -1,8 +1,8 @@
 ﻿@using System.Text
-@inject JsInterop Js
+@inject CommonJsInterop CommonJs
 
 <div class="my-component">
-    This component is defined in the <strong>Artisan.Components</strong> library.
+    This component is defined in the <strong>Artisan.CommonComponents</strong> library.
 
     <InputText @bind-Value="@Content"/>
     <button @onclick="@DownloadAsync">СКАЧАТЬ</button>
@@ -16,6 +16,6 @@
     {
         Stream fileContent = new MemoryStream(Encoding.UTF8.GetBytes(Content));
 
-        await Js.DownloadFileAsync(fileContent, "content.txt");
+        await CommonJs.DownloadFileAsync(fileContent, "content.txt");
     }
 }

@@ -1,0 +1,31 @@
+﻿@inject DiceJsInterop Js
+
+<div class="container">
+    <h5>@DiceName</h5>
+    <img src="@ImagePath" alt=@($"1d{MaxValue}")/>
+    <input type="number" min="1" max="65536" step="1" @bind="@DiceCount"/>
+    <button @onclick="@AlertResultAsync">Бросить!</button>
+</div>
+
+@code {
+
+    private ushort DiceCount { get; set; } = 1;
+    [Parameter]
+    public string? ImagePath { get; set; }
+    [Parameter]
+    public int MaxValue { get; set; }
+
+    private string DiceName => $"d{MaxValue}";
+    private string FullDiceName => $"{DiceCount}{DiceName}";
+
+    private int Minimum => DiceCount;
+    private int Maximum => DiceCount * MaxValue;
+
+    private async Task AlertResultAsync()
+    {
+        int throwResult = Enumerable.Range(1, DiceCount).Select(_ => Random.Shared.Next(1, MaxValue + 1)).Sum();
+        string result = $"Ваш результат {FullDiceName} [{Minimum}-{Maximum}] : {throwResult}";
+        
+        await Js.AlertAsync(result);
+    }
+}
