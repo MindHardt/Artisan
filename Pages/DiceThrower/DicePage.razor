@@ -3,16 +3,31 @@
 <PageTitle>Dice</PageTitle>
 
 <div class="dice">
-    <DieComponent MaxValue="3" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d6.svg"></DieComponent>
-    <DieComponent MaxValue="4" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d4.svg"></DieComponent>
-    <DieComponent MaxValue="6" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d6.svg"></DieComponent>
-    <DieComponent MaxValue="8" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d8.svg"></DieComponent>
-    <DieComponent MaxValue="10" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d10.svg"></DieComponent>
-    <DieComponent MaxValue="12" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d12.svg"></DieComponent>
-    <DieComponent MaxValue="20" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d20.svg"></DieComponent>
-    <DieComponent MaxValue="100" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d10.svg"></DieComponent>
+    <DieComponent MaxValue="3" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d3.svg" LogTo="@Log"></DieComponent>
+    <DieComponent MaxValue="4" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d4.svg" LogTo="@Log"></DieComponent>
+    <DieComponent MaxValue="6" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d6.svg" LogTo="@Log"></DieComponent>
+    <DieComponent MaxValue="8" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d8.svg" LogTo="@Log"></DieComponent>
+    <DieComponent MaxValue="10" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d10.svg" LogTo="@Log"></DieComponent>
+    <DieComponent MaxValue="12" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d12.svg" LogTo="@Log"></DieComponent>
+    <DieComponent MaxValue="20" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d20.svg" LogTo="@Log"></DieComponent>
+    <DieComponent MaxValue="100" ImagePath="./_content/Artisan.Pages.DiceThrower/dice-d100.svg" LogTo="@Log"></DieComponent>
+    
+</div>
+<div class="console">
+    @foreach (var log in _logs)
+    {
+        @log
+    }
 </div>
 
 @code {
+
+    private void Log(string s)
+    {
+        string log = $"{DateTime.Now:s}: {s}\n";
+        _logs.Add(log);
+        StateHasChanged();
+    }
     
+    private readonly List<string> _logs = new() { "Здесь будет отображаться история ваших бросков." };
 }

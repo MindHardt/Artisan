@@ -10,6 +10,8 @@
 </div>
 
 @code {
+	[Parameter]
+	public Action<string>? LogTo { get; set; }
 
     private ushort DiceCount { get; set; } = 1;
     [Parameter]
@@ -29,6 +31,7 @@
             .Select(_ => Random.Shared.Next(1, MaxValue + 1))
             .Sum();
         string result = $"Ваш результат {FullDiceName} [{Minimum}-{Maximum}] : {throwResult}";
+        LogTo?.Invoke(result);
         
         await Js.AlertAsync(result);
     }

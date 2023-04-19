@@ -4,3 +4,12 @@
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
+
+.console {
+    text-align: left;
+    font-family: monospace;
+    background-color: black;
+    color: lightgray;
+    width: 80%;
+    max-height: 20%;
+}
