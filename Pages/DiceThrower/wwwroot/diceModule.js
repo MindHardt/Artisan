@@ -4,3 +4,7 @@
 export function showAlert(message) {
   return alert(message);
 }
+
+export function requestConfirm(message) {
+  return confirm(message);
+}

@@ -25,6 +25,12 @@ public class DiceJsInterop : IAsyncDisposable
         await module.InvokeVoidAsync("showAlert", message);
     }
 
+    public async ValueTask<bool> ConfirmAsync(string message)
+    {
+        var module = await _moduleTask.Value;
+        return await module.InvokeAsync<bool>("requestConfirm", message);
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (_moduleTask.IsValueCreated)

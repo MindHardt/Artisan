@@ -1,4 +1,9 @@
 @page "/dice"
+@using Blazored.LocalStorage
+@using Microsoft.Extensions.Logging
+@inject ILocalStorageService LocalStorage
+@inject ILogger<DicePage> Logger
+@inject DiceJsInterop Js
 
 <PageTitle>Dice</PageTitle>
 
@@ -14,20 +19,48 @@
     
 </div>
 <div class="console">
+    <span onclick="@DropLogsAsync" class="console__drop">[НАЖМИТЕ ЧТОБЫ СБРОСИТЬ ЛОГИ]</span><br/>
     @foreach (var log in _logs)
     {
         @log
+        <br/>
     }
 </div>
 
 @code {
 
+    protected override async Task OnInitializedAsync()
+    {
+        var logs = await LocalStorage.GetItemAsync<Stack<string>>(LocalStorageKeyName);
+        logs ??= new Stack<string>();;
+
+        _logs = logs;
+    }
+
     private void Log(string s)
     {
         string log = $"{DateTime.Now:s}: {s}\n";
-        _logs.Add(log);
+        _logs.Push(log);
+        _ = BackupLogsAsync();
         StateHasChanged();
     }
+        
+    private const string LocalStorageKeyName = "DiceLogs";
+    private async Task BackupLogsAsync()
+    {
+        var backup = _logs.ToArray();
+        await LocalStorage.SetItemAsync(LocalStorageKeyName, backup);
+        Logger.LogInformation("Saved {Count} items to dice backup", backup.Length);
+    }
+
+    private async Task DropLogsAsync()
+    {
+        if (await Js.ConfirmAsync("Вы уверены что хотите сбросить логи?") is false)
+            return;
+        
+        await LocalStorage.RemoveItemAsync(LocalStorageKeyName);
+        _logs.Clear();
+    }
     
-    private readonly List<string> _logs = new() { "Здесь будет отображаться история ваших бросков." };
+    private Stack<string> _logs = new();
 }

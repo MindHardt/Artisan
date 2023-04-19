@@ -23,4 +23,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Components\Artisan.CommonComponents.csproj" />
+  </ItemGroup>
+
 </Project>

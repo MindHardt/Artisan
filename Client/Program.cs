@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Artisan.Client;
 using Artisan.CommonComponents;
 using Artisan.Pages.DiceThrower;
+using Blazored.LocalStorage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -16,6 +17,8 @@ builder.Services.AddHttpClient("Artisan.ServerAPI", client => client.BaseAddress
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Artisan.ServerAPI"));
 builder.Services.AddScoped<CommonJsInterop>();
 builder.Services.AddScoped<DiceJsInterop>();
+
+builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddApiAuthorization();
 
