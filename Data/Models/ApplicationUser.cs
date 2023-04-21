@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Net;
+using Microsoft.AspNetCore.Identity;
 
-namespace Artisan.Server.Models;
+namespace Artisan.Data.Models;
 
 public class ApplicationUser : IdentityUser
 {
+    
 }
