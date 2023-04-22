@@ -1,0 +1,12 @@
+﻿@page "/chargen"
+@using Arklens.Builders
+@using Artisan.Pages.CharGen.Components
+
+<RaceGenderComponent Builder="@Builder"></RaceGenderComponent>
+
+@System.Text.Json.JsonSerializer.Serialize(Builder)
+
+@code
+{
+    private CharacterBuilder Builder { get; } = new();
+}

@@ -1,4 +1,5 @@
 ﻿@using System.Reflection
+@using Artisan.Pages.CharGen
 @using Artisan.Pages.DiceThrower
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@_additionalAssemblies">
@@ -28,8 +29,9 @@
 
 @code
 {
-    private readonly Assembly[] _additionalAssemblies = new[]
+    private readonly Assembly[] _additionalAssemblies = 
     {
-        typeof(DicePage).Assembly
+        typeof(DicePage).Assembly,
+        typeof(CharGenPage).Assembly
     };
 }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Components\Artisan.CommonComponents.csproj" />
+    <ProjectReference Include="..\Pages\CharGen\Artisan.Pages.CharGen.csproj" />
     <ProjectReference Include="..\Pages\DiceThrower\Artisan.Pages.DiceThrower.csproj" />
     <ProjectReference Include="..\Shared\Artisan.Shared.csproj" />
   </ItemGroup>

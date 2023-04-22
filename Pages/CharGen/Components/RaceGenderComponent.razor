@@ -1,0 +1,22 @@
+@using ArkLens.Entities.Elements
+@inherits CharacterBuilderComponent
+
+<InputSelect @bind-Value="@Builder.Gender.Name">
+    <option disabled selected hidden>Выберите пол персонажа</option>
+    @foreach (Gender gender in Gender.Values)
+    {
+        <option value="@(gender.Name)">@gender</option>
+    }
+</InputSelect>
+<InputSelect @bind-Value="@Builder.Race.Name">
+    <option disabled selected hidden>Выберите расу персонажа</option>
+    @foreach (Race race in Race.Values)
+    {
+        <option value="@(race.Name)">@race</option>
+    }
+</InputSelect>
+
+
+@code {
+    
+}
