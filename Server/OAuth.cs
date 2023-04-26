@@ -32,8 +32,8 @@ public static class OAuth
     {
         if (TryGetConfiguration(authConfig, name, out var clientId, out var clientSecret) is false) 
             return;
+        
         string callbackPath = $"/signin-{name.ToLower()}";
-        Console.WriteLine(callbackPath);
         
         addOAuthDelegate(options =>
         {

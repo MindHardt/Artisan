@@ -22,6 +22,27 @@ namespace Artisan.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ArkLens.Snapshots.CharacterSnapshot", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Race")
+                        .HasColumnType("text");
+
+                    b.HasKey("Name");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("CharacterSnapshot");
+                });
+
             modelBuilder.Entity("Artisan.Data.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -382,6 +403,14 @@ namespace Artisan.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ArkLens.Snapshots.CharacterSnapshot", b =>
+                {
+                    b.HasOne("Artisan.Data.Models.ApplicationUser", null)
+                        .WithMany("CharacterSnapshots")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -431,6 +460,11 @@ namespace Artisan.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Artisan.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("CharacterSnapshots");
                 });
 #pragma warning restore 612, 618
         }
