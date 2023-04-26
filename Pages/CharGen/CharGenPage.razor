@@ -1,10 +1,19 @@
 ﻿@page "/chargen"
 @using Arklens.Builders
+@using ArkLens.Snapshots
 @using Artisan.Pages.CharGen.Components
+@using System.Text.Json
+@inject JsonSerializerOptions JsonOptions
 
 <RaceGenderComponent Builder="@Builder"></RaceGenderComponent>
 
-@System.Text.Json.JsonSerializer.Serialize(Builder)
+<pre>
+    <code>
+        @JsonSerializer.Serialize(CharacterSnapshot.FromModel(Builder), JsonOptions)
+    </code>
+</pre>
+
+<button onclick="@StateHasChanged">+</button>
 
 @code
 {

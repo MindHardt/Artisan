@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ArkLens\ArkLens.Builders\ArkLens.Builders.csproj" />
+    <ProjectReference Include="..\..\ArkLens\ArkLens.Snapshots\ArkLens.Snapshots.csproj" />
+    <ProjectReference Include="..\..\Components\Artisan.CommonComponents.csproj" />
   </ItemGroup>
 
 </Project>

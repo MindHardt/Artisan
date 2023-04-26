@@ -1,3 +1,4 @@
+using Artisan.CommonComponents.JsInterop;
 using Microsoft.JSInterop;
 
 namespace Artisan.CommonComponents;
@@ -9,43 +10,31 @@ namespace Artisan.CommonComponents;
 // This class can be registered as scoped DI service and then injected into Blazor
 // components for use.
 
-public class CommonJsInterop : IAsyncDisposable
+public class CommonJsInterop : JsInteropBase
 {
-    private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
-
-    public CommonJsInterop(IJSRuntime jsRuntime)
+    protected override string JsFileRelativePath { get; } = "Artisan.CommonComponents/module.js";
+    
+    public CommonJsInterop(IJSRuntime jsRuntime) : base(jsRuntime)
     {
-        _moduleTask = new Lazy<Task<IJSObjectReference>>(() => 
-            jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/Artisan.CommonComponents/module.js")
-            .AsTask());
     }
 
     public async ValueTask AlertAsync(string message)
     {
-        var module = await _moduleTask.Value;
+        var module = await GetModuleAsync();
         await module.InvokeVoidAsync("callAlert", message);
     }
     
     public async ValueTask<string> PromptAsync(string message)
     {
-        var module = await _moduleTask.Value;
+        var module = await GetModuleAsync();
         return await module.InvokeAsync<string>("showPrompt", message);
     }
 
     public async ValueTask DownloadFileAsync(Stream content, string fileName)
     {
-        var module = await _moduleTask.Value;
+        var module = await GetModuleAsync();
         DotNetStreamReference streamRef = new(content);
 
         await module.InvokeVoidAsync("downloadFile", fileName, streamRef);
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (_moduleTask.IsValueCreated)
-        {
-            var module = await _moduleTask.Value;
-            await module.DisposeAsync();
-        }
     }
 }

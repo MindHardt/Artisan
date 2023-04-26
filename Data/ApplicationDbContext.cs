@@ -3,11 +3,17 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Duende.IdentityServer.EntityFramework.Options;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 
 namespace Artisan.Data;
 
-public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+public class ApplicationDbContext : 
+    ApiAuthorizationDbContext<ApplicationUser>,
+    IDataProtectionKeyContext
 {
+
+    public DbSet<DataProtectionKey> DataProtectionKeys => Set<DataProtectionKey>();
+    
     public ApplicationDbContext(
         DbContextOptions options,
         IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)

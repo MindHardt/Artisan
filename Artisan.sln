@@ -30,6 +30,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkLens.Core", "ArkLens\Ark
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkLens.Resources", "ArkLens\ArkLens.Resources\ArkLens.Resources.csproj", "{5FABB431-39EB-4786-B2BA-A5288B7F83FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE05B9D0-B21C-43FF-8F81-5B0EC825ECA6}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		.env = .env
+		postgres.env = postgres.env
+		Dockerfile = Dockerfile
+		.dockerignore = .dockerignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkLens.Snapshots", "ArkLens\ArkLens.Snapshots\ArkLens.Snapshots.csproj", "{A070A234-0D8F-4987-8A90-FA18F60AEA46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -184,6 +195,18 @@ Global
 		{5FABB431-39EB-4786-B2BA-A5288B7F83FF}.Release|x64.Build.0 = Release|Any CPU
 		{5FABB431-39EB-4786-B2BA-A5288B7F83FF}.Release|x86.ActiveCfg = Release|Any CPU
 		{5FABB431-39EB-4786-B2BA-A5288B7F83FF}.Release|x86.Build.0 = Release|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Debug|x64.Build.0 = Debug|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Debug|x86.Build.0 = Debug|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Release|x64.ActiveCfg = Release|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Release|x64.Build.0 = Release|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Release|x86.ActiveCfg = Release|Any CPU
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,6 +218,7 @@ Global
 		{21BA58DB-FE9F-4FA5-B9D1-01A793152081} = {7DCC1D60-E3FA-4009-9576-0C522CECD56A}
 		{CABE9EEB-20B3-4C29-9049-8806AB854289} = {7DCC1D60-E3FA-4009-9576-0C522CECD56A}
 		{5FABB431-39EB-4786-B2BA-A5288B7F83FF} = {7DCC1D60-E3FA-4009-9576-0C522CECD56A}
+		{A070A234-0D8F-4987-8A90-FA18F60AEA46} = {7DCC1D60-E3FA-4009-9576-0C522CECD56A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {422D60E5-99FE-4131-A862-C284448C02CA}

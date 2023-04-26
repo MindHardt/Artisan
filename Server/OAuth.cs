@@ -23,7 +23,7 @@ public static class OAuth
 
         return auth;
     }
-
+    
     private static void TryAddOAuth<TOptions>(
         IConfiguration authConfig, 
         string name,
@@ -32,12 +32,14 @@ public static class OAuth
     {
         if (TryGetConfiguration(authConfig, name, out var clientId, out var clientSecret) is false) 
             return;
+        string callbackPath = $"/signin-{name.ToLower()}";
+        Console.WriteLine(callbackPath);
         
         addOAuthDelegate(options =>
         {
             options.ClientId = clientId;
             options.ClientSecret = clientSecret;
-            options.CallbackPath = $"/signin-{name.ToLower()}";
+            options.CallbackPath = callbackPath;
         });
     }
 

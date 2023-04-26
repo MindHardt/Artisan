@@ -1,3 +1,4 @@
+using Artisan.CommonComponents.JsInterop;
 using Microsoft.JSInterop;
 
 namespace Artisan.Pages.DiceThrower;
@@ -9,34 +10,23 @@ namespace Artisan.Pages.DiceThrower;
 // This class can be registered as scoped DI service and then injected into Blazor
 // components for use.
 
-public class DiceJsInterop : IAsyncDisposable
+public class DiceJsInterop : JsInteropBase
 {
-    private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
+    protected override string JsFileRelativePath => "Artisan.Pages.DiceThrower/diceModule.js";
 
-    public DiceJsInterop(IJSRuntime jsRuntime)
+    public DiceJsInterop(IJSRuntime jsRuntime) : base(jsRuntime)
     {
-        _moduleTask = new (() => jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/Artisan.Pages.DiceThrower/diceModule.js").AsTask());
     }
 
     public async ValueTask AlertAsync(string message)
     {
-        var module = await _moduleTask.Value;
+        var module = await GetModuleAsync();
         await module.InvokeVoidAsync("showAlert", message);
     }
 
     public async ValueTask<bool> ConfirmAsync(string message)
     {
-        var module = await _moduleTask.Value;
+        var module = await GetModuleAsync();
         return await module.InvokeAsync<bool>("requestConfirm", message);
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (_moduleTask.IsValueCreated)
-        {
-            var module = await _moduleTask.Value;
-            await module.DisposeAsync();
-        }
     }
 }

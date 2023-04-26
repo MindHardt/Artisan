@@ -1,6 +1,7 @@
 using Artisan.Data;
 using Artisan.Data.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artisan.Server;
@@ -36,6 +37,9 @@ public class Startup
             .AddCustomOAuth(_cfg)
             .AddIdentityServerJwt();
 
+        services.AddDataProtection()
+            .PersistKeysToDbContext<ApplicationDbContext>();
+
         services.AddControllersWithViews();
         services.AddRazorPages();
 
@@ -44,6 +48,8 @@ public class Startup
     
     public void Configure(IApplicationBuilder app)
     {
+        MigrateDatabase(app.ApplicationServices);
+        
         if (_env.IsDevelopment())
         {
             app.UseMigrationsEndPoint();
@@ -78,5 +84,11 @@ public class Startup
             e.MapControllers();
             e.MapFallbackToFile("index.html");
         });
+    }
+
+    public void MigrateDatabase(IServiceProvider services)
+    {
+        using var ctx = services.GetRequiredService<ApplicationDbContext>();
+        ctx.Database.Migrate();
     }
 }
