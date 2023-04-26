@@ -8,6 +8,8 @@ public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<Appli
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        
+        builder.HasMany(u => u.CharacterSnapshots)
+            .WithOne()
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

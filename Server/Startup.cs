@@ -1,5 +1,6 @@
 using Artisan.Data;
 using Artisan.Data.Models;
+using Artisan.Data.Repos;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,6 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        // Add services to the container.
         var connectionString = _cfg.GetConnectionString("DefaultConnection") 
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -27,9 +27,11 @@ public class Startup
             options.UseNpgsql(connectionString));
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+        services.AddRepositories<ApplicationDbContext>();
 
+        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+        
         services.AddIdentityServer()
             .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 

@@ -21,4 +21,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ArkLens\ArkLens.Snapshots\ArkLens.Snapshots.csproj" />
+  </ItemGroup>
+
 </Project>
