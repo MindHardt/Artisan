@@ -3,6 +3,7 @@ using Artisan.Data.Models;
 using Artisan.Data.Repos;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artisan.Server;
@@ -51,6 +52,11 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         MigrateDatabase(app.ApplicationServices);
+        
+        app.UseForwardedHeaders(new ForwardedHeadersOptions 
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        });
         
         if (_env.IsDevelopment())
         {

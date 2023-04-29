@@ -33,13 +33,22 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE05B9D0-B21C-43FF-8F81-5B0EC825ECA6}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
-		.env = .env
+		app.env = app.env
 		postgres.env = postgres.env
 		Dockerfile = Dockerfile
 		.dockerignore = .dockerignore
+		seq.env = seq.env
+		nginx.conf = nginx.conf
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkLens.Snapshots", "ArkLens\ArkLens.Snapshots\ArkLens.Snapshots.csproj", "{A070A234-0D8F-4987-8A90-FA18F60AEA46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Certificates", "Certificates", "{42028324-2A91-4162-8B4C-CAFFE4A5FA4C}"
+	ProjectSection(SolutionItems) = preProject
+		Certificates\artisan.pfx = Certificates\artisan.pfx
+		Certificates\artisan.crt = Certificates\artisan.crt
+		Certificates\artisan.rsa = Certificates\artisan.rsa
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -219,6 +228,7 @@ Global
 		{CABE9EEB-20B3-4C29-9049-8806AB854289} = {7DCC1D60-E3FA-4009-9576-0C522CECD56A}
 		{5FABB431-39EB-4786-B2BA-A5288B7F83FF} = {7DCC1D60-E3FA-4009-9576-0C522CECD56A}
 		{A070A234-0D8F-4987-8A90-FA18F60AEA46} = {7DCC1D60-E3FA-4009-9576-0C522CECD56A}
+		{42028324-2A91-4162-8B4C-CAFFE4A5FA4C} = {BE05B9D0-B21C-43FF-8F81-5B0EC825ECA6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {422D60E5-99FE-4131-A862-C284448C02CA}

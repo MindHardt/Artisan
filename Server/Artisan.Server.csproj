@@ -41,10 +41,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="artisan.pfx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

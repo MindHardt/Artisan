@@ -8,6 +8,17 @@
 
 services:
   
+  nginx:
+    container_name: "nginx"
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./Certificates/artisan.crt:/etc/nginx/cert.crt:ro
+      - ./Certificates/artisan.rsa:/etc/nginx/cert.rsa:ro
+    ports:
+      - 80:80
+      - 443:443
+  
   postgres:
     container_name: "postgres"
     image: postgres
@@ -15,27 +26,25 @@ services:
       - postgres.env
     volumes:
       - postgres-data:/var/lib/postgresql/data/
-    ports:
-      - 20002:5432
   
   seq:
     container_name: "seq"
     image: datalust/seq
     environment:
       - ACCEPT_EULA=Y
+    env_file:
+      - seq.env
     volumes:
+      - ./Certificates/artisan.pfx:/data/Certificates/443.pfx
       - seq-data:/data/
-    ports:
-      - 20003:80
 
   artisan.server:
     container_name: "app"
     image: artisan.server
+    volumes:
+      - ./Certificates/artisan.pfx:/app/artisan.pfx:ro 
     env_file:
-      - .env
-    ports:
-      - 20000:80
-      - 20001:443
+      - app.env
     build:
       context: .
       dockerfile: Dockerfile
